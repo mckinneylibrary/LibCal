@@ -409,6 +409,10 @@ width: 100%;
 
 
 /*********************************************************NAVBAR****************************************************************/
+#aspenDupe {
+margin: 0 20px;
+}
+
 #libcalHeader, #libcalHeaderMobile {
   background-size: cover;
   width: 100%;
@@ -421,13 +425,15 @@ width: 100%;
   font-family: 'Helvetica', sans-serif;
 }
 
-#doorIcon, #calendarIcon {
+#doorIcon, #calendarIcon, #aspenHome {
 margin-bottom: 5px;
 }
 
 #doorIcon:hover, #calendarIcon:hover, #aspenHome:hover {
 color: #9b4321;
 }
+
+
 input:focus, textarea:focus, select:focus{
         outline: none;
     }
@@ -443,7 +449,8 @@ input:focus, textarea:focus, select:focus{
 .aspennavbar {
   overflow: hidden;
   background-color: white;
-  border-bottom: solid 1px #084d69;
+  padding-top: 5px;
+  margin: 0 20px;
 }
 
 /* Links inside the navbar */
@@ -525,35 +532,44 @@ vertical-align: middle;
 
 .menuText {
 font-size: 16px;
-padding-left: 5px;
+padding-left: 0px;
 font-weight: 400;
 }
 
 .searchForm {
-  background-color: #084d69; 
-  padding-top: 10px; 
-  padding-left: 15px;
-  
+  background-color: #084d69;
+}
+
+#searchIconButton {
+background-color: white;
+width: 37px;
+height: 36.5px;
+border-radius: 5px 0 0 5px;
+padding-top: 5px;
+display: inline-block;
+}
+
+#searchandfacets {
+  padding: 10px 15px;
 }
 
 #libcalSearchIcon {
   background-color: #fff; 
-  height: 1.15em;
-  display: inline-block;
+  height: 1.25em;
   vertical-align: middle;
-  padding: 6.25px 7px;
-  width: 25px;
-  border-radius: 5px 0 0 5px;
+  width: 34px;
+  margin: auto;
   border: 1px solid white;
 }
 
 #libcalSearchBar {
-  width: 46%;
+  width: 48%;
   display: inline-block;
   vertical-align: middle;
   margin-left: -4px;
   border: none;
-  padding: 9px 0 7px 0;
+  height: 37px;
+  margin-top: 3px;
 }
 
 #libcalHeaderMobile {
@@ -561,27 +577,30 @@ font-weight: 400;
 }
 
 #searchSourceDesktop {
-  vertical-align: middle; 
-  height: 31px; 
+display: inline-block;  
+vertical-align: middle; 
+  height: 35px; 
   margin-left: 10px; 
   border: none; 
   width: 15%;
-  margin-top: -2px;
+ margin-top: 1px;
 }
 
 #searchIndexDesktop {
-  vertical-align: middle; 
-  height: 31px; 
+display: inline-block;  
+vertical-align: middle; 
+  height: 35px; 
   margin-left: 10px; 
-  margin-top: -2px;
   border: none; 
   width: 14%;
+  margin-top: 1px;
 }
 
 #searchSource, #searchIndex {
+ display: inline-block;
  height: 31px;
  border: none; 
- width: 45%;
+ width: 40%;
 }
 
 .mobileFacets {
@@ -595,25 +614,51 @@ font-weight: 400;
   margin-left: 10px; 
   vertical-align: middle; 
   border: none; 
-  width: 15%;
-  height: 29px;
+  width: 13%;
+  height: 34px;
 }
 
 
 @media only screen and (max-width: 1000px) {
   .libCalSearchButton {
-    width: 11%;
+    width: 10%;
   }
+#searchSourceDesktop {
+width: 17%;
+}
+}
+
+@media only screen and (max-width: 893px) {
+#libcalSearchBar {
+width: 40%;
+}
+
+#searchSourceDesktop {
+width: 20%;
+}
+
+.libCalSearchButton {
+width: 13%
+}
+
 }
 
 @media only screen and (max-width: 768px) {
   .libcalSearchBar {
-    width: 44%;
+    width: 35%;
   }
+  
+  .libCalSearchButton {
+   width: 10%;
 }
 
-@media only screen and (max-width: 636px) {
-  #searchSourceDesktop, #searchIndexDesktop {
+#searchSourceDesktop {
+ width: 21%;
+}
+}
+
+@media only screen and (max-width: 646px) {
+#searchSourceDesktop, #searchIndexDesktop {
     display: none;
   }
   .mobileFacets {
@@ -640,7 +685,7 @@ font-weight: 400;
     display: none;
   }
     .searchForm {
-    height: 85px;
+    height: 105px;
   }
   .menuText {
     display: none;
@@ -653,12 +698,16 @@ font-weight: 400;
   }
 }
 
+@media (min-width: 480px) and (max-width: 517px) {
+ 
+}
+
 @media only screen and (max-width: 480px) {
   .mobileFacets {
     width: 100%;
   }
   #libcalSearchBar {
-    width:84%;
+    width:85%;
   }
   .libcalSearchIcon {
     display: none;
@@ -671,7 +720,7 @@ font-weight: 400;
     width: 47.5%;
   }
   .searchForm {
-    height: 125px;
+    height: 145px;
   }
   #libcalHeader {
     display: none;
