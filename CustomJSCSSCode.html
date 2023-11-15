@@ -5,6 +5,8 @@
 <style>
 * {
 font-family: 'Helvetica Neue', sans-serif;
+max-width: 1170px;
+margin: auto;
 }
 
 a {
@@ -425,6 +427,10 @@ margin: 0 20px;
   font-family: 'Helvetica', sans-serif;
 }
 
+#aspenHome {
+margin-right: 0;
+}
+
 #doorIcon, #calendarIcon, #aspenHome {
 margin-bottom: 5px;
 }
@@ -450,7 +456,6 @@ input:focus, textarea:focus, select:focus{
   overflow: hidden;
   background-color: white;
   padding-top: 5px;
-  margin: 0 20px;
 }
 
 /* Links inside the navbar */
@@ -460,7 +465,7 @@ input:focus, textarea:focus, select:focus{
   color: #084d69;
   text-align: center;
   text-transform: uppercase;
-  padding: 14px 16px;
+  padding: 14px 10px;
   text-decoration: none;
   font-weight: bold;
 }
@@ -540,36 +545,49 @@ font-weight: 400;
   background-color: #084d69;
 }
 
-#searchIconButton {
-background-color: white;
-width: 37px;
-height: 36.5px;
-border-radius: 5px 0 0 5px;
-padding-top: 5px;
-display: inline-block;
+.aspen-input-group {
+display: inline-block; 
+position: relative;
+padding: 5px 0 5px 5px;
+}
+
+#libcaldropdown-lookfor-label {
+ position: absolute;
+  left: 10px;
+  top: calc(50% - .5em);
+width: 20px;
 }
 
 #searchandfacets {
-  padding: 10px 15px;
+display: block;
+width: 100%;
+margin: auto;  
+padding: 8px 2px 8px 5px;
 }
 
 #libcalSearchIcon {
-  background-color: #fff; 
+display: inline-block;
+background-color: #fff; 
   height: 1.25em;
-  vertical-align: middle;
-  width: 34px;
+  width: 100%;
   margin: auto;
-  border: 1px solid white;
+}
+
+#searchIconSpan {
+background-color: white;
+width: 8%;
+height: 57px;
+border-radius: 5px 0 0 5px;
+padding: 9px 5px 12px 5px;
 }
 
 #libcalSearchBar {
-  width: 48%;
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: -4px;
+  width: 100%;
+  display: block;
   border: none;
+  border-radius: 10px 0 0 10px;
   height: 37px;
-  margin-top: 3px;
+  padding-left: 35px;
 }
 
 #libcalHeaderMobile {
@@ -590,7 +608,6 @@ vertical-align: middle;
 display: inline-block;  
 vertical-align: middle; 
   height: 35px; 
-  margin-left: 10px; 
   border: none; 
   width: 14%;
   margin-top: 1px;
@@ -598,54 +615,35 @@ vertical-align: middle;
 
 #searchSource, #searchIndex {
  display: inline-block;
- height: 31px;
+ height: 37px;
  border: none; 
  width: 40%;
 }
 
 .mobileFacets {
  width: 60%; 
- margin-top: 10px;
 }
 
 .libCalSearchButton {
   background-color: #fff;
   border-radius: 5px; 
-  margin-left: 10px; 
   vertical-align: middle; 
   border: none; 
   width: 13%;
-  height: 34px;
+  height: 37px;
 }
 
-
-@media only screen and (max-width: 1000px) {
-  .libCalSearchButton {
-    width: 10%;
+@media only screen and (min-width: 768px) {
+    .mobileFacets {
+    display: none;
   }
-#searchSourceDesktop {
-width: 17%;
-}
+
+.aspen-input-group {
+width: 53%;
 }
 
-@media only screen and (max-width: 893px) {
-#libcalSearchBar {
-width: 40%;
-}
-
-#searchSourceDesktop {
-width: 20%;
-}
-
-.libCalSearchButton {
-width: 13%
-}
-
-}
-
-@media only screen and (max-width: 768px) {
-  .libcalSearchBar {
-    width: 35%;
+.libcalSearchBar {
+    width: 100%;
   }
   
   .libCalSearchButton {
@@ -653,31 +651,47 @@ width: 13%
 }
 
 #searchSourceDesktop {
- width: 21%;
-}
+ width: 20%;
+margin-left: 2px;
 }
 
-@media only screen and (max-width: 646px) {
+#searchIndexDesktop {
+width: 15%:
+}
+
+}
+
+@media only screen and (max-width: 768px) {
 #searchSourceDesktop, #searchIndexDesktop {
     display: none;
   }
   .mobileFacets {
     width: 100%;
+padding-left: 10px;
+margin-top: 5px;
   }
   
   #searchSource, #searchIndex, .libCalSearchButtonMobile {
     width: 32%;  
   }
+
+.aspen-input-group {
+width: 97%;
+padding: 10px 0 0 10px;
+margin: 0 10px 0 0;
+}
+
+.libcalSearchBar {
+width: 100%;
+}
   
   .libCalSearchButtonMobile {
     border: none; 
     background-color: white; 
     border-radius: 5px;
-    height: 29px;
+    height: 37px;
   }
-  #libcalSearchBar {
-    width: 90%;
-  }
+
   .libCalSearchButton {
     display: none;
   }
@@ -690,44 +704,66 @@ width: 13%
   .menuText {
     display: none;
   }
+#libcaldropdown-lookfor-label {
+  left: 20px;
+  top: calc(55% - .5em);
 }
 
-@media only screen and (min-width: 636px) {
-  .mobileFacets {
-    display: none;
-  }
 }
 
-@media (min-width: 480px) and (max-width: 517px) {
- 
+@media only screen and (max-width: 646px) {
+#libcalHeader {
+display: none;
 }
+#libcalHeaderMobile {
+display: block;
+}
+#aspenDupe {
+margin: 0;
+}
+} 
+
+@media (min-width: 480px) and (max-width: 503px) {
+.mobileFacets {
+margin-top: -15px;
+}
+}
+
 
 @media only screen and (max-width: 480px) {
-  .mobileFacets {
-    width: 100%;
-  }
-  #libcalSearchBar {
-    width:85%;
-  }
-  .libcalSearchIcon {
-    display: none;
-  }
-  .libCalSearchButtonMobile {
-    width: 96%;
-    margin-top: 10px;
-  }
-  #searchIndex, #searchSource {
-    width: 47.5%;
-  }
-  .searchForm {
-    height: 145px;
-  }
-  #libcalHeader {
-    display: none;
-  }
-  #libcalHeaderMobile {
-    display: block;
-  }
+.searchForm {
+height: 185px;
+}
+
+.aspen-input-group {
+width: 100%
+padding: 10px 0 0 10px;
+margin-bottom: -5px;
+}  
+
+ #libcalSearchBar {
+width: 100%;
+}
+
+.mobileFacets {
+padding: 0 10px;
+margin-top:-10px;
+}
+
+#searchIndex, #searchSource, .libCalSearchButtonMobile {
+width: 100%; 
+}
+
+#searchIndex, #searchSource {
+margin-bottom: 5px;
+}
+
+#libcaldropdown-lookfor-label {
+width: 20px;  
+left: 20px;
+  top: calc(55% - .5em);
+}
+
 }
 
 /********************************************************END NAVBAR***********************************************************/
