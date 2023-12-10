@@ -338,7 +338,7 @@ margin: auto;
 
 #returnCatalog {
 text-decoration: none;
-font-size: 1.25em;
+font-size: 1em;
 }
 
 #returnCatalog:hover {
@@ -347,7 +347,7 @@ background-color: #9b4321;
 
 /**************End Event Buttons *******************/
 #s-lc-event-desc {
-font-size: 1.25em;
+font-size: 1em;
 }
 
 .s-lc-event-dl {
@@ -420,22 +420,28 @@ margin: 0 20px;
   width: 100%;
 }
 
-#doorIcon, #calendarIcon, #aspenHome {
+#infoIcon, #calendarIcon, #aspenHome, #signinIcon, #hamburgerIcon, #laptopIcon, #genealogyIcon {
   vertical-align: middle;
   fill: currentColor;
-  margin-right: 5px;
   font-family: 'Helvetica', sans-serif;
+}
+
+
+#hamburgerIcon {
+color: #084d69;
+padding: 0 5px;
+margin-top: -2px;
 }
 
 #aspenHome {
 margin-right: 0;
 }
 
-#doorIcon, #calendarIcon, #aspenHome {
+#infoIcon, #calendarIcon, #aspenHome, #laptopIcon, #genealogyIcon {
 margin-bottom: 5px;
 }
 
-#doorIcon:hover, #calendarIcon:hover, #aspenHome:hover {
+#infoIcon:hover, #calendarIcon:hover, #aspenHome:hover, #signinIcon:hover, #hamburgerIcon:hover, #laptopIcon:hover, #genealogyIcon:hover {
 color: #9b4321;
 }
 
@@ -476,6 +482,17 @@ input:focus, textarea:focus, select:focus{
   overflow: hidden;
 }
 
+.rightDropdown, .signinAspen {
+float: right;
+overflow: hidden
+}
+
+.rightMenu {
+left: auto !important;
+right: 0 !important;
+}
+
+
 /* Dropdown link */
 .libcaldropdown .libcaldroplink {
   font-size: 16px;
@@ -515,6 +532,7 @@ vertical-align: middle;
   text-decoration: none;
   display: block;
   text-align: left;
+  font-size: 14px;
   text-transform: capitalize;
   font-weight: normal;
 }
@@ -536,13 +554,15 @@ vertical-align: middle;
 }
 
 .menuText {
-font-size: 16px;
+font-size: 14px;
 padding-left: 0px;
 font-weight: 400;
 }
 
 .searchForm {
   background-color: #084d69;
+height: 60px;
+padding-top: 6px;
 }
 
 .aspen-input-group {
@@ -568,7 +588,7 @@ padding: 8px 2px 8px 5px;
 #libcalSearchIcon {
 display: inline-block;
 background-color: #fff; 
-  height: 1.25em;
+  height: 1em;
   width: 100%;
   margin: auto;
 }
@@ -699,7 +719,7 @@ width: 100%;
     display: none;
   }
     .searchForm {
-    height: 105px;
+    height: 110px;
   }
   .menuText {
     display: none;
@@ -725,7 +745,7 @@ margin: 0;
 
 @media only screen and (max-width: 480px) {
 .searchForm {
-height: 185px;
+height: 190px;
 }
 
 .aspen-input-group {
