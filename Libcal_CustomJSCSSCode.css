@@ -1,0 +1,26 @@
+<style>
+.s-lc-space-primary-in-use, .s-lc-space-secondary-in-use {
+    background-color: #084d69;
+}
+
+.s-lc-space-tint-in-use {
+    background-color: #ffffff;
+}
+
+#s-lc-view-availability-btn {
+display: none; 
+}
+
+#space > div.container-fluid > main > div.row.s-lc-space-status-container > div.col-5.ps-4.pe-5.d-flex.align-items-center.s-lc-space-secondary-in-use > div {
+display: block;
+}
+
+#s-lc-check-in-btn {
+display: none;
+}
+
+#space > div.container-fluid > main > div.row.s-lc-space-status-container > div.col-5.ps-4.pe-5.d-flex.align-items-center.s-lc-space-secondary-in-use > div > div.mb-3.s-lc-status-upcoming-booking-detail {
+color: #fff;
+}
+
+</style>
