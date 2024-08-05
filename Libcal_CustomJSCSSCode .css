@@ -823,8 +823,7 @@ display: none;
 
 </style> 
 
-
-<!--Start Javascript Hiding Specific Location Attributes-->
+<!----------------------------------------Start JavaScript hiding certain location attributes --------------------------------> 
 <script>
  let checkCard = setInterval(function () {
   //need to wait for the cards to load
