@@ -819,6 +819,24 @@ background-color: #ffffff;
  #s-lc-view-availability-btn {
 display: none;
 }
-*************************End Tablet View Styling for GIS*****************************************************/
+/*************************End Tablet View Styling for GIS*****************************************************/
 
 </style> 
+
+
+<!--Start Javascript Hiding Specific Location Attributes-->
+<script>
+ let checkCard = setInterval(function () {
+  //need to wait for the cards to load
+  if ($(".s-lc-eventcard-heading-text-group").length > 0) {
+      //get the text, split, grab the campus
+      $(".s-lc-eventcard-heading-text-group > div:nth-child(2)").each(function(){
+       let ctext = $( this ).text();
+        let carr = ctext.split(",");
+        $(this).text(carr[0]); //campus is first index
+      });
+      clearInterval(checkCard ); //stop checking
+  }
+},100);
+</script>
+
