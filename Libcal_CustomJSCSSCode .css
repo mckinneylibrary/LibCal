@@ -1,6 +1,5 @@
-<!--<img src="https://github.com/mckinneylibrary/images/blob/master/Aspen/Libcal%20Banner.gif?raw=true" alt="Image of Patrons Reading" style="width: 100%;">-->
-
-
+/****Stylesheets and Scripts for Libcal live in the same text box. They prefer to be wrapped in <style> and <script> tags to function properly.**************/
+/****jQuery version 3.7.1 is loaded into every LibCal page. Do not add any javascript that will load jQuery as this will cause errors and break functionality.*******/
 
 <style>
 body {
@@ -838,4 +837,5 @@ display: none;
   }
 },100);
 </script>
+
 
