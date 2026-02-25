@@ -100,14 +100,31 @@
 
 </div>
 <!---------Search Bar-------------->
- <form action="https://mckinney.aspendiscovery.org/Union/Search" method="get" target="blank" class="searchForm">
+<!--
+  FIXED 2025-02-25 by Tosin Fatosa
+  ByWater Ticket #208968
+  All values verified against live Aspen instance (mckinney.aspendiscovery.org) via DevTools
 
-	<input name="searchSource" value="local" type="hidden">
+  Bugs fixed:
+  1. CRITICAL: Removed hidden input name="searchSource" value="local" that overrode dropdown
+  2. Removed broken target="blank" (missing underscore) -- searches now stay in same tab
+  3. Added all 7 searchSource options to desktop dropdown (was only showing "in Library Catalog")
+  4. Added all 8 searchIndex options to both desktop and mobile (was hardcoded to EventsKeyword)
+  5. Added JavaScript (libcalUpdateSearchTypes) to swap search types per source
+  6. Removed invalid HTML comment inside select opening tag
+  7. Removed duplicate id attribute on search input
+  8. Kept form action as mckinney.aspendiscovery.org (matching original code)
+
+  Verified searchSource values: local, events, lists, websites, open_archives, genealogy, combined
+  Verified searchIndex values: Keyword, Title, StartOfTitle, Series, Author, Subject, LocalCallNumber, advanced
+-->
+ <form action="https://mckinney.aspendiscovery.org/Union/Search" method="get" class="searchForm">
+
 	<input name="basicType" value="Keyword" type="hidden">
 
 <div class="aspen-input-group">
-	<input id="libcalSearchBar" title="Enter one or more terms to search for. Surrounding a term with quotes will limit result to only those that exactly match the term." id="libcaldropdown-lookfor" name="lookfor" type="text" aria-labelledby="dropdown-lookfor-label">	
-	 <label for="lookfor" id="libcaldropdown-lookfor-label">
+	<input id="libcalSearchBar" title="Enter one or more terms to search for.    Surrounding a term with quotes will limit result to only those that exactly match the term." name="lookfor" type="text" autocomplete="off" aria-labelledby="libcaldropdown-lookfor-label" aria-required="true">	
+	 <label for="libcalSearchBar" id="libcaldropdown-lookfor-label">
 		<svg class="aspenNavIcon" id="libcalSearchIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
 			 <style>svg{fill:#084d69}</style>
 			 <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
@@ -117,30 +134,122 @@
 </div>
 
 <!--Facets for Desktop Size -->
-  <label for="searchIndex" id="libcaldropdown-searchIndex-label">                       
+  <label for="searchIndexDesktop" id="libcaldropdown-searchIndex-label">                       
     <span class="sr-only" style="position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0);border: 0;">Search Index</span>
       </label>
          <select name="searchIndex" class="searchTypeHorizontal form-control catalogType" id="searchIndexDesktop" title="The method of searching." aria-label="Search Index">
-          <!--Index that shows when selecting "in Events" search source-->
-          <option class="inEvents" value="EventsKeyword" selected="" id="default_search_type">Keyword</option>                 
+          <option value="Keyword" selected id="default_search_type">Keyword</option>
+          <option value="Title">Title</option>
+          <option value="StartOfTitle">Start of Title</option>
+          <option value="Series">Series</option>
+          <option value="Author">Author</option>
+          <option value="Subject">Subject</option>
+          <option value="LocalCallNumber">Call Number</option>
+          <option value="advanced">Advanced Search</option>
       </select>
-      <select name="searchSource" class="searchSourceHorizontal form-control" id="searchSourceDesktop" <!--onchange="AspenDiscovery.Searches.loadSearchTypes();"--> title="Select what to search. Items marked with a * will redirect you to one of our partner sites." aria-labelledby="Collection to Search">
-        <option data-catalog_type="catalog" value="local" title="The McKinney Public Libraries catalog." data-advanced_search="1" data-advanced_search_label="Advanced Search" selected=" selected">in Library Catalog</option>
-         </select>
+      <select name="searchSource" class="searchSourceHorizontal form-control" id="searchSourceDesktop" title="Select what to search. Items marked with a * will redirect you to one of our partner sites." aria-label="Collection to Search" onchange="libcalUpdateSearchTypes('searchIndexDesktop', this.value)">
+        <option data-catalog_type="catalog" value="local" title="The McKinney Public Libraries catalog." data-advanced_search="1" data-advanced_search_label="Advanced Search" selected="selected">in Library Catalog</option>
+        <option data-catalog_type="events" value="events" title="Search events at the library" data-advanced_search data-advanced_search_label="Advanced Search">in Events</option>
+        <option data-catalog_type="lists" value="lists" title="User Lists" data-advanced_search data-advanced_search_label="Advanced Search">in Lists</option>
+        <option data-catalog_type="websites" value="websites" title="Library Website" data-advanced_search data-advanced_search_label="Advanced Search">in Library Website</option>
+        <option data-catalog_type="open_archives" value="open_archives" title="Local History and Archive Information" data-advanced_search data-advanced_search_label="Advanced Search">in History &amp; Archives</option>
+        <option data-catalog_type="genealogy" value="genealogy" title="Genealogy Records" data-advanced_search data-advanced_search_label="Advanced Search">in Genealogy Records</option>
+        <option data-catalog_type="combined" value="combined" title="Combined results from multiple sources." data-advanced_search data-advanced_search_label="Advanced Search">in Combined Results</option>
+      </select>
 <!--Separated out Facets in their own DIV for Scaling in Mobile-->      
     <div class="mobileFacets">
         <select name="searchIndex" class="searchTypeHorizontal form-control catalogType" id="searchIndex" title="The method of searching." aria-label="Search Index">
-          <!--Index that shows when selecting "in Events" search source-->
-          <option class="inEvents" value="EventsKeyword" selected="" id="default_search_type">Keyword</option>                                             
+          <option value="Keyword" selected id="default_search_type_mobile">Keyword</option>
+          <option value="Title">Title</option>
+          <option value="StartOfTitle">Start of Title</option>
+          <option value="Series">Series</option>
+          <option value="Author">Author</option>
+          <option value="Subject">Subject</option>
+          <option value="LocalCallNumber">Call Number</option>
+          <option value="advanced">Advanced Search</option>
         </select>
-        <select name="searchSource" class="searchSourceHorizontal form-control" id="searchSource" <!--onchange="AspenDiscovery.Searches.loadSearchTypes();"--> title="Select what to search. Items marked with a * will redirect you to one of our partner sites." aria-labelledby="Collection to Search">
-          <option data-catalog_type="catalog" value="local" title="The McKinney Public Libraries catalog." data-advanced_search="1" data-advanced_search_label="Advanced Search" selected=" selected">in Library Catalog</option>
-          <option data-catalog_type="events" value="events" title="Search events at the library" data-advanced_search="" data-advanced_search_label="Advanced Search">in Events</option>
+        <select name="searchSource" class="searchSourceHorizontal form-control" id="searchSource" title="Select what to search. Items marked with a * will redirect you to one of our partner sites." aria-label="Collection to Search" onchange="libcalUpdateSearchTypes('searchIndex', this.value)">
+          <option data-catalog_type="catalog" value="local" title="The McKinney Public Libraries catalog." data-advanced_search="1" data-advanced_search_label="Advanced Search" selected="selected">in Library Catalog</option>
+          <option data-catalog_type="events" value="events" title="Search events at the library" data-advanced_search data-advanced_search_label="Advanced Search">in Events</option>
+          <option data-catalog_type="lists" value="lists" title="User Lists" data-advanced_search data-advanced_search_label="Advanced Search">in Lists</option>
+          <option data-catalog_type="websites" value="websites" title="Library Website" data-advanced_search data-advanced_search_label="Advanced Search">in Library Website</option>
+          <option data-catalog_type="open_archives" value="open_archives" title="Local History and Archive Information" data-advanced_search data-advanced_search_label="Advanced Search">in History &amp; Archives</option>
+          <option data-catalog_type="genealogy" value="genealogy" title="Genealogy Records" data-advanced_search data-advanced_search_label="Advanced Search">in Genealogy Records</option>
+          <option data-catalog_type="combined" value="combined" title="Combined results from multiple sources." data-advanced_search data-advanced_search_label="Advanced Search">in Combined Results</option>
         </select>
         <input class="libCalSearchButtonMobile" type="submit" alt="Search Catalog" value="Search">
 </div>
         <input class="libCalSearchButton" type="submit" alt="Search Catalog" value="Search">
   </form>
+
+<script>
+/*
+ * libcalUpdateSearchTypes() - Swap search index options based on selected search source.
+ * Mirrors AspenDiscovery.Searches.loadSearchTypes() from the live Aspen instance.
+ * All values verified against mckinney.aspendiscovery.org DevTools on 2025-02-25.
+ *
+ * Note: On the real Aspen site, loadSearchTypes() makes an AJAX call to dynamically
+ * fetch the correct search types per source. Since LibCal cannot call Aspen's JS,
+ * we hardcode the known search type mappings here instead.
+ */
+function libcalUpdateSearchTypes(indexSelectId, sourceValue) {
+  var indexSelect = document.getElementById(indexSelectId);
+  if (!indexSelect) return;
+
+  /* Clear existing options */
+  indexSelect.innerHTML = '';
+
+  var types = [];
+
+  switch (sourceValue) {
+    case 'events':
+      types = [{value: 'EventsKeyword', text: 'Keyword'}];
+      break;
+    case 'lists':
+      types = [
+        {value: 'ListsKeyword', text: 'Keyword'},
+        {value: 'ListsTitle', text: 'Title'},
+        {value: 'ListsAuthor', text: 'Author'}
+      ];
+      break;
+    case 'websites':
+      types = [{value: 'WebsiteKeyword', text: 'Keyword'}];
+      break;
+    case 'open_archives':
+      types = [
+        {value: 'OpenArchivesKeyword', text: 'Keyword'},
+        {value: 'OpenArchivesTitle', text: 'Title'},
+        {value: 'OpenArchivesSubject', text: 'Subject'}
+      ];
+      break;
+    case 'genealogy':
+      types = [{value: 'GenealogyKeyword', text: 'Keyword'}];
+      break;
+    default:
+      /* catalog (local) and combined use the full set */
+      types = [
+        {value: 'Keyword', text: 'Keyword'},
+        {value: 'Title', text: 'Title'},
+        {value: 'StartOfTitle', text: 'Start of Title'},
+        {value: 'Series', text: 'Series'},
+        {value: 'Author', text: 'Author'},
+        {value: 'Subject', text: 'Subject'},
+        {value: 'LocalCallNumber', text: 'Call Number'},
+        {value: 'advanced', text: 'Advanced Search'}
+      ];
+      break;
+  }
+
+  types.forEach(function(t, i) {
+    var opt = document.createElement('option');
+    opt.value = t.value;
+    opt.textContent = t.text;
+    if (i === 0) opt.selected = true;
+    indexSelect.appendChild(opt);
+  });
+}
+</script>
+
 </div>
 </div>
 </div>
